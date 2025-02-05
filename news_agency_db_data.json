@@ -1,0 +1,34 @@
+{
+  "model": "migrations",
+  "operations": [
+    {
+      "operation": "CreateModel",
+      "name": "Topic",
+      "fields": {
+        "id": {"type": "AutoField", "primary_key": true},
+        "name": {"type": "CharField", "max_length": 255, "unique": true}
+      }
+    },
+    {
+      "operation": "CreateModel",
+      "name": "Redactor",
+      "base": "AbstractUser",
+      "fields": {
+        "id": {"type": "AutoField", "primary_key": true},
+        "years_of_experience": {"type": "PositiveIntegerField", "default": 0}
+      }
+    },
+    {
+      "operation": "CreateModel",
+      "name": "Newspaper",
+      "fields": {
+        "id": {"type": "AutoField", "primary_key": true},
+        "title": {"type": "CharField", "max_length": 255},
+        "content": {"type": "TextField"},
+        "published_date": {"type": "DateTimeField"},
+        "topic": {"type": "ForeignKey", "to": "Topic", "on_delete": "CASCADE", "related_name": "newspapers"},
+        "publishers": {"type": "ManyToManyField", "to": "Redactor", "related_name": "newspapers"}
+      }
+    }
+  ]
+}
