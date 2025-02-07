@@ -13,16 +13,10 @@ class Topic(models.Model):
 class Redactor(AbstractUser):
     years_of_experience = models.PositiveIntegerField(default=0)
 
-    groups = models.ManyToManyField(
-        Group,
-        related_name="redactors",
-        blank=True
-    )
+    groups = models.ManyToManyField(Group, related_name="redactors", blank=True)
 
     user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="redactors_permissions",
-        blank=True
+        Permission, related_name="redactors_permissions", blank=True
     )
 
     def __str__(self):
@@ -34,9 +28,7 @@ class Newspaper(models.Model):
     content = models.TextField()
     published_date = models.DateTimeField()
     topic = models.ForeignKey(
-        Topic,
-        on_delete=models.CASCADE,
-        related_name="newspapers"
+        Topic, on_delete=models.CASCADE, related_name="newspapers"
     )
     publishers = models.ManyToManyField(Redactor, related_name="newspapers")
 

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Redactors</h1>
+  {% if redactors %}
+    <ul>
+      {% for redactor in redactors %}
+        <li>
+          <a href="{% url 'news_agency_app:redactor-detail' pk=redactor.id %}">{{ redactor.username }}</a>
+          ({{ redactor.years_of_experience }} years of experience)
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No redactors found.</p>
+  {% endif %}
+{% endblock %}

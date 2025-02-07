@@ -1,34 +1,62 @@
-{
-  "model": "migrations",
-  "operations": [
-    {
-      "operation": "CreateModel",
-      "name": "Topic",
-      "fields": {
-        "id": {"type": "AutoField", "primary_key": true},
-        "name": {"type": "CharField", "max_length": 255, "unique": true}
-      }
-    },
-    {
-      "operation": "CreateModel",
-      "name": "Redactor",
-      "base": "AbstractUser",
-      "fields": {
-        "id": {"type": "AutoField", "primary_key": true},
-        "years_of_experience": {"type": "PositiveIntegerField", "default": 0}
-      }
-    },
-    {
-      "operation": "CreateModel",
-      "name": "Newspaper",
-      "fields": {
-        "id": {"type": "AutoField", "primary_key": true},
-        "title": {"type": "CharField", "max_length": 255},
-        "content": {"type": "TextField"},
-        "published_date": {"type": "DateTimeField"},
-        "topic": {"type": "ForeignKey", "to": "Topic", "on_delete": "CASCADE", "related_name": "newspapers"},
-        "publishers": {"type": "ManyToManyField", "to": "Redactor", "related_name": "newspapers"}
-      }
+[
+  {
+    "model": "news_agency_app.topic",
+    "pk": 1,
+    "fields": {
+      "name": "Politics"
     }
-  ]
-}
+  },
+  {
+    "model": "news_agency_app.topic",
+    "pk": 2,
+    "fields": {
+      "name": "Sports"
+    }
+  },
+  {
+    "model": "news_agency_app.redactor",
+    "pk": 1,
+    "fields": {
+      "username": "editor1",
+      "years_of_experience": 5,
+      "is_superuser": false,
+      "is_staff": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "news_agency_app.redactor",
+    "pk": 2,
+    "fields": {
+      "username": "editor2",
+      "years_of_experience": 3,
+      "is_superuser": false,
+      "is_staff": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "news_agency_app.newspaper",
+    "pk": 1,
+    "fields": {
+      "title": "Elections 2025",
+      "content": "The upcoming elections are drawing global attention...",
+      "published_date": "2025-02-05T12:00:00Z",
+      "topic": 1,
+      "publishers": [1]
+    }
+  },
+  {
+    "model": "news_agency_app.newspaper",
+    "pk": 2,
+    "fields": {
+      "title": "Championship Finals",
+      "content": "The championship finals saw an intense match between top teams...",
+      "published_date": "2025-02-05T14:00:00Z",
+      "topic": 2,
+      "publishers": [2]
+    }
+  }
+]
