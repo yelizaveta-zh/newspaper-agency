@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>News Agency Home</h1>
+  <p>Welcome to our news platform!</p>
+
+  <h2>Statistics</h2>
+  <p>Our agency currently has:</p>
+  <ul>
+    <li><strong>Newspapers:</strong> {{ num_newspapers }}</li>
+    <li><strong>Topics:</strong> {{ num_topics }}</li>
+    <li><strong>Redactors:</strong> {{ num_redactors }}</li>
+  </ul>
+
+  <p>You have visited this page
+    {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
+
+{% endblock %}

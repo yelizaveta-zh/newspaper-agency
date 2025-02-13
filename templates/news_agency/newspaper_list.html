@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Newspaper list
+  </h1>
+  {% if newspapers %}
+    <ul>
+      {% for newspaper in newspapers %}
+        <li>
+          <a href="{% url 'news_agency_app:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a>
+          ({{ newspaper.published_date }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No newspapers available.</p>
+  {% endif %}
+  <a href="{% url 'news_agency_app:newspaper-create' %}" class="btn btn-primary link-to-page">
+    Create
+  </a>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ newspaper.title }}</h1>
+  <p><strong>Published on:</strong> {{ newspaper.published_date }}</p>
+  <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+  <p>{{ newspaper.content }}</p>
+
+  <h3>Publishers:</h3>
+  <ul>
+    {% for publisher in newspaper.publishers.all %}
+      <li>{{ publisher.username }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'news_agency_app:newspaper-update' pk=newspaper.id %}" class="btn btn-warning">Edit</a>
+  <a href="{% url 'news_agency_app:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger">Delete</a>
+{% endblock %}
