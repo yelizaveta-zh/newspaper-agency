@@ -1,7 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
+
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
+
+from django.views import generic
 from django.views.generic import (
     ListView,
     DetailView,
@@ -13,7 +17,6 @@ from django.views.generic import (
 from news_agency_app.models import Topic, Newspaper, Redactor
 
 
-@login_required
 def index(request):
     """View function for the home page of the site with visit count."""
 
@@ -105,3 +108,19 @@ class CustomLoginView(LoginView):
 
 class CustomLogoutView(LogoutView):
     template_name = "registration/logged_out.html"
+
+
+class SearchListView(generic.ListView):
+    search_fields = []
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search = self.request.GET.get("search")
+
+        if search:
+            q_objects = Q()
+            for field in self.search_fields:
+                q_objects |= Q(**{f"{field}__contains": search})
+            queryset = queryset.filter(q_objects)
+
+        return queryset

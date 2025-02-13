@@ -3,9 +3,6 @@
 {% block content %}
   <h1>
     Newspaper list
-    <a href="{% url 'news_agency_app:newspaper-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
   </h1>
   {% if newspapers %}
     <ul>
@@ -19,4 +16,7 @@
   {% else %}
     <p>No newspapers available.</p>
   {% endif %}
+  <a href="{% url 'news_agency_app:newspaper-create' %}" class="btn btn-primary link-to-page">
+    Create
+  </a>
 {% endblock %}

@@ -3,6 +3,7 @@ from django.urls import path
 
 from news_agency_app.views import TopicCreateView, TopicUpdateView
 
+
 urlpatterns = [
     path("", views.index, name="index"),
     path("newspapers/", views.NewspaperListView.as_view(), name="newspaper-list"),

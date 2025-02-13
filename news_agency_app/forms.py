@@ -1,5 +1,6 @@
 from django import forms
-from .models import Newspaper, Redactor, Topic
+
+from news_agency_app.models import Newspaper, Redactor, Topic
 
 
 class NewspaperForm(forms.ModelForm):
