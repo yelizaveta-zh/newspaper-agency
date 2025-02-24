@@ -15,7 +15,7 @@ from django.views.generic import (
     DeleteView,
 )
 
-from news_agency_app.forms import RegistrationForm
+from news_agency_app.forms import CustomUserCreationForm
 from news_agency_app.models import Topic, Newspaper, Redactor
 
 
@@ -128,15 +128,7 @@ class SearchListView(generic.ListView):
         return queryset
 
 
-def register(request):
-    if request.method == "POST":
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data["password"])
-            user.save()
-            login(request, user)
-            return redirect("news_agency_app:index")
-    else:
-        form = RegistrationForm()
-    return render(request, "registration/register.html", {"form": form})
+class RegisterView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = "registration/register.html"
+    success_url = reverse_lazy("newspaper-list")
