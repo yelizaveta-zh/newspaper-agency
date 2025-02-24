@@ -12,7 +12,9 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(Redactor)
 class RedactorAdmin(UserAdmin):
-    list_display = ("id", "username", "email", "years_of_experience", "is_staff")
+    list_display = (
+        "id", "username", "email", "years_of_experience", "is_staff"
+    )
     search_fields = ("username", "email")
     list_filter = ("years_of_experience", "is_staff")
     fieldsets = UserAdmin.fieldsets + (

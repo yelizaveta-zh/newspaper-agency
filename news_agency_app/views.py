@@ -1,8 +1,9 @@
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
 from django.views import generic
@@ -14,6 +15,7 @@ from django.views.generic import (
     DeleteView,
 )
 
+from news_agency_app.forms import RegistrationForm
 from news_agency_app.models import Topic, Newspaper, Redactor
 
 
@@ -124,3 +126,17 @@ class SearchListView(generic.ListView):
             queryset = queryset.filter(q_objects)
 
         return queryset
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password"])
+            user.save()
+            login(request, user)
+            return redirect("news_agency_app:index")
+    else:
+        form = RegistrationForm()
+    return render(request, "registration/register.html", {"form": form})
