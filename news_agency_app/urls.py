@@ -12,7 +12,7 @@ urlpatterns = [
     path(
         "newspapers/",
         views.NewspaperListView.as_view(),
-        name="newspaper-list"
+        name="newspaper-list",
     ),
     path(
         "newspapers/<int:pk>/",

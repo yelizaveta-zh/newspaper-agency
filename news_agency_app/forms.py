@@ -35,5 +35,5 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, label="Email")
 
     class Meta:
-        model = User
+        model = Redactor
         fields = ["username", "email", "password1", "password2"]
