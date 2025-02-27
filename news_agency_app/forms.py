@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from news_agency_app.models import Newspaper, Redactor, Topic
 
@@ -27,3 +29,11 @@ class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic
         fields = ["name"]
+
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True, label="Email")
+
+    class Meta:
+        model = Redactor
+        fields = ["username", "email", "password1", "password2"]

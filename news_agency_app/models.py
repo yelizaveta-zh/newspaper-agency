@@ -13,7 +13,9 @@ class Topic(models.Model):
 class Redactor(AbstractUser):
     years_of_experience = models.PositiveIntegerField(default=0)
 
-    groups = models.ManyToManyField(Group, related_name="redactors", blank=True)
+    groups = models.ManyToManyField(
+        Group, related_name="redactors", blank=True
+    )
 
     user_permissions = models.ManyToManyField(
         Permission, related_name="redactors_permissions", blank=True
